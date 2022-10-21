@@ -59,12 +59,19 @@ namespace MVCProjectCamp.Controllers
             var HeadingValue=headingManager.GetByID(id);
             return View(HeadingValue);
         }
-        //[HttpPost]
-        //public ActionResult EditHeading(Heading heading)
-        //{
-        //    var HeadingValue = headingManager.GetByID(id);
-        //    return View(HeadingValue);
-        //}
+        [HttpPost]
+        public ActionResult EditHeading(Heading heading)
+        {
+            headingManager.HeadingUpdate(heading);
+            return View("Index");
+        }
 
+        public ActionResult DeleteHeading(int id)
+        {
+            var HeadingValue = headingManager.GetByID(id);
+            HeadingValue.HeadingStatus = false;
+            headingManager.HeadingDelete(HeadingValue);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -15,7 +15,7 @@ namespace BusinessLayer.Concrete
 
         public HeadingManager(IHeadingDal headingDal)
         {
-            this._headingDal = headingDal;
+            _headingDal = headingDal;
         }
 
         public Heading GetByID(int id)
@@ -35,7 +35,7 @@ namespace BusinessLayer.Concrete
 
         public void HeadingDelete(Heading heading)
         {
-            _headingDal.Delete(heading);
+            _headingDal.Update(heading);
         }
 
         public void HeadingUpdate(Heading heading)
