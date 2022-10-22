@@ -13,6 +13,11 @@ namespace BusinessLayer.Concrete
     {
         IAboutDal _aboutDal;
 
+        public AboutManager(IAboutDal aboutDal)
+        {
+            _aboutDal = aboutDal;
+        }
+
         public void AboutAdd(About about)
         {
             _aboutDal.Insert(about);
