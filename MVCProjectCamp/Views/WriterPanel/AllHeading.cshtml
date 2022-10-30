@@ -1,11 +1,12 @@
 ﻿@using EntityLayer.Concrete
-@model List<Heading>
+@model PagedList.IPagedList<Heading>
+@using PagedList
+@using PagedList.Mvc
+
 @{
-    ViewBag.Title = "MyHeading";
+    ViewBag.Title = "AllHeading";
     Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
-
-
 
 @{ string color = "";}
 
@@ -68,7 +69,7 @@
                             }
                             if (item.Category.CategoryName == "Bilim")
                             {
-                                color = "badge badge-danger";
+                                color = "badge badge-info";
                             }
                             if (item.Category.CategoryName == "Seyahat")
                             {
@@ -99,21 +100,17 @@
                                     <span class="@color">@item.Category.CategoryName</span>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="/Content/ContentByHeading/@item.HeadingID">
+                                    <a class="btn btn-primary btn-sm" href="/Default/Headings/@item.HeadingID">
                                         <i class="fas fa-folder">
                                         </i>
                                         Yazılar
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="/WriterPanel/EditHeading/@item.HeadingID">
+                                    <a class="btn btn-info btn-sm" href="/WriterPanelContent/AddContent/@item.HeadingID">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        Düzenle
-                                    </a>
-                                    <a class="btn btn-danger btn-sm" href="/WriterPanel/DeleteHeading/@item.HeadingID">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Sil
-                                    </a>
+                                        
+                                        Bu başlığa yaz
+                                    </a>                                    
                                 </td>
                             </tr>
                         }
@@ -123,12 +120,13 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
     </section>
     <!-- /.content -->
 </body>
 </html>
-<a href="/WriterPanel/NewHeading/" class="btn btn-info">Yeni Başlık Girişi</a>
-
-
+@Html.PagedListPager((IPagedList)Model, p => Url.Action("AllHeading", new { p }), new PagedListRenderOptions
+{
+    LiElementClasses=new List<string>
+    {"page-link"}
+})
 

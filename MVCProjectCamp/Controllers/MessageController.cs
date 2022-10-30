@@ -18,15 +18,15 @@ namespace MVCProjectCamp.Controllers
         MessageValidator messagevalidator = new MessageValidator();
         
         [Authorize]
-        public ActionResult Inbox()
+        public ActionResult Inbox(string p)
         {
-            var messagelist = messageManager.GetListInbox();
+            var messagelist = messageManager.GetListInbox(p);
             return View(messagelist);
         }
 
-        public ActionResult Sendbox()
+        public ActionResult Sendbox(string p)
         {
-            var messagelist=messageManager.GetListSendbox();
+            var messagelist=messageManager.GetListSendbox(p);
             return View(messagelist);
         }
         public ActionResult GetInBoxMessageDetails(int id)
